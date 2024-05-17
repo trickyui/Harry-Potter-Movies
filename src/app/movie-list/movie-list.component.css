@@ -1,0 +1,12 @@
+.movie-list {
+    margin: 1rem 0;
+}
+
+.movie-list li:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.filters {
+    background-color: #e5e5e5;
+    padding: var(--universal-padding);
+}

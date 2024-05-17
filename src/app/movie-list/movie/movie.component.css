@@ -1,0 +1,25 @@
+.movie-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.movie-title {
+    font-size: 1.05rem;
+    line-height: 1;
+    font-weight: var(--fontSemibold);
+    margin: 0;
+}
+
+.movie-extra-details small {
+    line-height: 1;
+    display: inline-block;
+    margin-right: 0.75rem;
+}
+
+button {
+    margin: 0;
+}
+
+button:hover {
+    background-color: #c6c6c6;
+}

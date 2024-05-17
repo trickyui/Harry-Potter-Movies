@@ -1,0 +1,35 @@
+<button class="small" (click)="goBack()"><span class="icon-home"></span> Back</button>
+<article>
+    <h1>{{data?.title}}</h1>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <figure>
+                <img [src]="data?.poster" alt="Movie poster image" priority/>
+            </figure>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-9">
+            <p><strong>Summary:</strong> {{data?.summary}}</p>
+        </div>
+    </div>
+    <table class="horizontal">
+        <caption>Details</caption>
+        <thead>
+            <tr>
+                <th>Box Office</th>
+                <th>Budget</th>
+                <th>Duration</th>
+                <th>Producers</th>
+                <th>Cinematographers</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Box Office">${{data?.box_office}} million</td>
+                <td data-label="Budget">${{data?.budget}} million</td>
+                <td data-label="Duration">{{data?.duration | timeConverter}}</td>
+                <td data-label="Producers">{{data?.producers}}</td>
+                <td data-label="Cinematographers">{{data?.cinematographers}}</td>
+            </tr>
+        </tbody>
+    </table>
+</article>

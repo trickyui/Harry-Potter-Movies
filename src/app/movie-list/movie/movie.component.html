@@ -1,0 +1,11 @@
+<div class="movie-list-item">
+    <div class="movie-details">
+        <h4 class="movie-title">{{movie.title}}</h4>
+        <div class="movie-extra-details">
+            <small>Release Date: {{movie.release_date}}</small>
+            <small>Budget: ${{movie.budget}} million</small>
+            <small>Duration: {{movie.duration | timeConverter}}</small>
+        </div>
+    </div>
+    <button class="small" (click)="openDetails(movie.id)">Details</button>
+</div>

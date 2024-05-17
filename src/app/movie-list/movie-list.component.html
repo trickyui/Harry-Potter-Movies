@@ -1,0 +1,22 @@
+<div class="filters">
+    <h4>Filters</h4>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-5">
+            <label for="title">Title</label>
+            <input type="text" id="title" [(ngModel)]="title" name="title" />
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-7">
+            <label for="year">Release year</label>
+            <input type="number" id="year" [(ngModel)]="year" name="year" />
+        </div>
+    </div>
+</div>
+<ul class="movie-list">
+    @for(movie of movies | searchFilter : title : year; track movie.title) {
+    <li>
+        <app-movie [movie]="movie" />
+    </li>
+    } @empty {
+    <p [style.textAlign]="'center'">No record found!</p>
+    }
+</ul>
