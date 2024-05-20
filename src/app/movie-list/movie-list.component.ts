@@ -14,9 +14,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class MovieListComponent implements OnInit {
   moviesService = inject(MoviesService);
+  
   movies: Movie[] = [];
   title: string = '';
-  year: string = '';
+  year!: number;
 
   ngOnInit(): void {
     this.moviesService.getMoviesList().subscribe(response => {

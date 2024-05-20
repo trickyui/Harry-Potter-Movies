@@ -1,17 +1,18 @@
 import { Component, Input, OnChanges, OnInit, inject } from '@angular/core';
 import { Movie } from '../../shared/interfaces/movie.interface';
-import { TimeConverterPipe } from '../../shared/pipes/time-converter.pipe';
 import { Router } from '@angular/router';
+import { MinutesToHoursPipe } from '../../shared/pipes/minutes-to-hours.pipe';
 
 @Component({
   selector: 'app-movie',
   standalone: true,
-  imports: [TimeConverterPipe],
+  imports: [MinutesToHoursPipe],
   templateUrl: './movie.component.html',
   styleUrl: './movie.component.css'
 })
 export class MovieComponent{
   router = inject(Router);
+
   @Input() movie!: Movie;
 
   openDetails(id: string):void {

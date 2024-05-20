@@ -5,4 +5,5 @@ export const routes: Routes = [
     { path: '', redirectTo: '/movies', pathMatch: 'full' },
     { path: 'movies', component: MovieListComponent },
     { path: 'movies/:id', loadComponent: () => import('./movie-list/movie-details/movie-details.component').then(m => m.MovieDetailsComponent) },
+    { path: '**', redirectTo: '/movies', pathMatch: 'full' },
 ];

@@ -11,8 +11,9 @@
         </div>
     </div>
 </div>
+
 <ul class="movie-list">
-    @for(movie of movies | searchFilter : title : year; track movie.title) {
+    @for(movie of movies | searchFilter : title : year; track movie.id) {
     <li>
         <app-movie [movie]="movie" />
     </li>

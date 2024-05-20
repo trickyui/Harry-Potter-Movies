@@ -2,13 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoviesService } from '../../shared/services/movies.service';
 import { MovieDetails } from '../../shared/interfaces/movie.interface';
-import { TitleCasePipe } from '@angular/common';
-import { TimeConverterPipe } from '../../shared/pipes/time-converter.pipe';
+import { AsyncPipe, TitleCasePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { MinutesToHoursPipe } from '../../shared/pipes/minutes-to-hours.pipe';
 
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [TitleCasePipe, TimeConverterPipe],
+  imports: [TitleCasePipe, MinutesToHoursPipe, AsyncPipe],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'
 })
@@ -16,18 +17,15 @@ export class MovieDetailsComponent implements OnInit {
   route = inject(ActivatedRoute);
   router = inject(Router);
   moviesService = inject(MoviesService);
-  id!: string;
-  data!: MovieDetails | null;
+
+  movieId!: string;
+  movieDetails$!: Observable<MovieDetails>;
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id') || '';
+   this.route.params.subscribe(params => {
+      this.movieId = params['id'];
+      this.movieDetails$ = this.moviesService.getMovieDetails(this.movieId);
     });
-    if (this.id) {
-      this.moviesService.getMovieDetails(this.id).subscribe(response => {
-        this.data = response;
-      })
-    }
   }
 
   goBack(): void {
