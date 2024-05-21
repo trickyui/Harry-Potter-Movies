@@ -16,7 +16,7 @@ export class SearchFilterPipe implements PipeTransform {
       movies = movies.filter(movie => movie.title.toLocaleLowerCase().includes(title))
     }
 
-    const isYearSearched = year && (year.toString().length == 4);
+    const isYearSearched = year && (year.toString().length === 4);
     if (isYearSearched) {
       movies = movies.filter(movie => {
         const release_year = new Date(movie.release_date).getFullYear()
