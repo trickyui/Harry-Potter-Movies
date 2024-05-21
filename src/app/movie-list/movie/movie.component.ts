@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, inject } from '@angular/core';
 import { Movie } from '../../shared/interfaces/movie.interface';
 import { Router } from '@angular/router';
-import { MinutesToHoursPipe } from '../../shared/pipes/minutes-to-hours.pipe';
+import { MinutesToHoursPipe } from '../../shared/pipes/minutes-to-hours/minutes-to-hours.pipe';
 
 @Component({
   selector: 'app-movie',

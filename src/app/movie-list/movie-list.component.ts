@@ -2,7 +2,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { MoviesService } from '../shared/services/movies.service';
 import { Movie } from '../shared/interfaces/movie.interface';
 import { MovieComponent } from './movie/movie.component';
-import { SearchFilterPipe } from '../shared/pipes/search-filter.pipe';
+import { SearchFilterPipe } from '../shared/pipes/search-filter/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
 
 @Component({

@@ -4,7 +4,7 @@ import { MoviesService } from '../../shared/services/movies.service';
 import { MovieDetails } from '../../shared/interfaces/movie.interface';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { MinutesToHoursPipe } from '../../shared/pipes/minutes-to-hours.pipe';
+import { MinutesToHoursPipe } from '../../shared/pipes/minutes-to-hours/minutes-to-hours.pipe';
 
 @Component({
   selector: 'app-movie-details',
