@@ -20,7 +20,7 @@ export class MovieListComponent implements OnInit {
   year!: number;
 
   ngOnInit(): void {
-    this.moviesService.getMoviesList().subscribe(response => {
+    this.moviesService.getMoviesList().subscribe((response: Movie[]) => {
       this.movies = response;
     });
   }
