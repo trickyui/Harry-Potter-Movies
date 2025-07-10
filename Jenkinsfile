@@ -3,7 +3,7 @@ pipeline{
   stages{
     stage('Checkout Code'){
       steps{
-        git branch 'main', 'https://github.com/trickyui/Harry-Potter-Movies.git'
+        git branch: 'main', 'https://github.com/trickyui/Harry-Potter-Movies.git'
       }
     }
 
