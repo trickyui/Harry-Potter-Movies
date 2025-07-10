@@ -18,7 +18,7 @@ pipeline {
         echo 'Verifying Node.js and npm versions...'
         bat 'node -v'
         bat 'npm -v'
-        bat 'ng version'
+        // bat 'ng version'
       }
     }
 
@@ -32,7 +32,7 @@ pipeline {
     stage('Build Angular App') {
       steps {
         echo 'Building the Angular application...'
-        bat 'ng build --configuration=production' // Builds the app for production
+        bat 'npm run build --configuration=production' // Builds the app for production
       }
     }
   }
