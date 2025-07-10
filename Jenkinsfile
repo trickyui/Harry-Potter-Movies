@@ -1,27 +1,21 @@
 pipeline{
   agent any
   stages{
-    stage('Checkout Code'){
+    stage('One'){
       steps{
-        git branch: 'main', 'https://github.com/trickyui/Harry-Potter-Movies.git'
+        echo 'This is the first stage'
       }
     }
 
-    stage('Build'){
+    stage('Two'){
       steps{
-        bat 'echo "building application"'
+        echo 'This is the second stage'
       }
     }
 
-    stage('Test'){
+    stage('Three'){
       steps{
-        bat 'echo "Running tests"'
-      }
-    }
-
-    stage('Deploy'){
-      steps{
-        bat 'echo "Deploying"'
+        echo 'This is the third stage'
       }
     }
   }
