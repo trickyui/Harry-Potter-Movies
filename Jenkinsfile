@@ -16,23 +16,23 @@ pipeline {
     stage('Verify Node.js and npm') {
       steps {
         echo 'Verifying Node.js and npm versions...'
-        sh 'node -v'
-        sh 'npm -v'
-        sh 'ng version'
+        bat 'node -v'
+        bat 'npm -v'
+        bat 'ng version'
       }
     }
 
     stage('Install Dependencies') {
       steps {
         echo 'Installing dependencies...'
-        sh 'npm ci' // Use npm ci for clean installations in CI/CD environments
+        bat 'npm ci' // Use npm ci for clean installations in CI/CD environments
       }
     }
 
     stage('Build Angular App') {
       steps {
         echo 'Building the Angular application...'
-        sh 'ng build --configuration=production' // Builds the app for production
+        bat 'ng build --configuration=production' // Builds the app for production
       }
     }
   }
