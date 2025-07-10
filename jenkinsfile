@@ -1,53 +1,28 @@
-pipeline {
-    agent any // Specifies that the pipeline can run on any available Jenkins agent.
-
-    // tools {
-    //     // Ensure Node.js is configured in Jenkins under Global Tool Configuration.
-    //     nodejs 'NodeJS' // Replace 'NodeJS 16' with the name you configured in Jenkins for your Node.js installation.
-    // }
-
-    environment {
-       BUILD_DIR = 'harry-potter-movies' // Sets an environment variable for the build directory.
-    //    DEPLOY_DIR = '/var/www/html/harry-potter-movies' // Sets an environment variable for the deployment directory.
+pipeline{
+  agent any
+  stages{
+    stage('Checkout Code'){
+      steps{
+        git branch 'https://github.com/trickyui/Harry-Potter-Movies.git'
+      }
     }
 
-    stages {
-        stage('Clone Repository') { // Stage to clone the repository.
-            steps {
-                git branch: 'main', url: 'https://github.com/trickyui/Harry-Potter-Movies.git' // Clones the specified branch of the repository.
-            }
-        }
-
-        stage('Verrify Node.js and npm') {
-            steps {
-                sh 'node -v' // Prints the Node.js version.
-                sh 'npm -v' // Prints the npm version.
-                sh 'ng version' // Prints the Angular CLI version.
-            }
-        }
-
-        stage('Install Dependencies') { // Stage to install project dependencies.
-            steps {
-                sh 'npm install' // Installs the dependencies defined in package.json.
-            }
-        }
-
-        stage('Build Project') { // Stage to build the project.
-            steps {
-                sh 'ng build --configuration=production' // Runs the build script defined in package.json.
-            }
-        }
+    stage('Build'){
+      steps{
+        sh 'echo "building application"'
+      }
     }
 
-    post { // Defines post-build actions based on pipeline status.
-        // always { // Executes in every case, whether the pipeline succeeds or fails.
-        //     cleanWs() // Cleans the workspace after the build.
-        // }
-        success {
-            echo 'Pipeline completed successfully.' // Prints a success message.
-        }
-        failure {
-            echo 'Pipeline failed.' // Prints a failure message.
-        }
+    stage('Test'){
+      steps{
+        sh 'echo "Running tests"'
+      }
     }
+
+    stage('Deploy'){
+      steps{
+        sh 'echo "Deploying"'
+      }
+    }
+  }
 }
