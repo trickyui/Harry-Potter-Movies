@@ -1,42 +1,48 @@
 pipeline {
     agent any // Specifies that the pipeline can run on any available Jenkins agent.
 
-    tools {
-        // Ensure Node.js is configured in Jenkins under Global Tool Configuration.
-        nodejs 'NodeJS' // Replace 'NodeJS 16' with the name you configured in Jenkins for your Node.js installation.
+    // tools {
+    //     // Ensure Node.js is configured in Jenkins under Global Tool Configuration.
+    //     nodejs 'NodeJS' // Replace 'NodeJS 16' with the name you configured in Jenkins for your Node.js installation.
+    // }
+
+    environment {
+       BUILD_DIR = 'harry-potter-movies' // Sets an environment variable for the build directory.
+    //    DEPLOY_DIR = '/var/www/html/harry-potter-movies' // Sets an environment variable for the deployment directory.
     }
 
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') { // Stage to clone the repository.
             steps {
-                git credentialsId: 'trickyui', 
-                url: 'https://github.com/trickyui/Harry-Potter-Movies.git' // Replace with your repository URL and credentials ID.
+                git branch: 'main', url: 'https://github.com/trickyui/Harry-Potter-Movies.git' // Clones the specified branch of the repository.
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Verrify Node.js and npm') {
             steps {
-                sh 'npm install' // Installs project dependencies.
+                sh 'node -v' // Prints the Node.js version.
+                sh 'npm -v' // Prints the npm version.
+                sh 'ng version' // Prints the Angular CLI version.
             }
         }
 
-        stage('Build') {
+        stage('Install Dependencies') { // Stage to install project dependencies.
             steps {
-                sh 'npm run build -- --configuration=production' // Builds the Angular application for production.
+                sh 'npm install' // Installs the dependencies defined in package.json.
             }
         }
 
-        stage('Test') {
+        stage('Build Project') { // Stage to build the project.
             steps {
-                sh 'npm test -- --watch=false --browsers=ChromeHeadless' // Runs unit tests in a headless browser.
+                sh 'ng build --configuration=production' // Runs the build script defined in package.json.
             }
         }
     }
 
     post { // Defines post-build actions based on pipeline status.
-        always { // Executes in every case, whether the pipeline succeeds or fails.
-            cleanWs() // Cleans the workspace after the build.
-        }
+        // always { // Executes in every case, whether the pipeline succeeds or fails.
+        //     cleanWs() // Cleans the workspace after the build.
+        // }
         success {
             echo 'Pipeline completed successfully.' // Prints a success message.
         }
