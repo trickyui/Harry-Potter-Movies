@@ -3,25 +3,25 @@ pipeline{
   stages{
     stage('Checkout Code'){
       steps{
-        git branch 'https://github.com/trickyui/Harry-Potter-Movies.git'
+        git branch 'main', 'https://github.com/trickyui/Harry-Potter-Movies.git'
       }
     }
 
     stage('Build'){
       steps{
-        sh 'echo "building application"'
+        bat 'echo "building application"'
       }
     }
 
     stage('Test'){
       steps{
-        sh 'echo "Running tests"'
+        bat 'echo "Running tests"'
       }
     }
 
     stage('Deploy'){
       steps{
-        sh 'echo "Deploying"'
+        bat 'echo "Deploying"'
       }
     }
   }
