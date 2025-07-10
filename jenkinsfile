@@ -1,0 +1,47 @@
+pipeline {
+    agent any // Specifies that the pipeline can run on any available Jenkins agent.
+
+    tools {
+        // Ensure Node.js is configured in Jenkins under Global Tool Configuration.
+        nodejs 'NodeJS' // Replace 'NodeJS 16' with the name you configured in Jenkins for your Node.js installation.
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git credentialsId: 'trickyui', 
+                url: 'https://github.com/trickyui/Harry-Potter-Movies.git' // Replace with your repository URL and credentials ID.
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install' // Installs project dependencies.
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build -- --configuration=production' // Builds the Angular application for production.
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test -- --watch=false --browsers=ChromeHeadless' // Runs unit tests in a headless browser.
+            }
+        }
+    }
+
+    post { // Defines post-build actions based on pipeline status.
+        always { // Executes in every case, whether the pipeline succeeds or fails.
+            cleanWs() // Cleans the workspace after the build.
+        }
+        success {
+            echo 'Pipeline completed successfully.' // Prints a success message.
+        }
+        failure {
+            echo 'Pipeline failed.' // Prints a failure message.
+        }
+    }
+}
